@@ -2,9 +2,9 @@ const fecha=document.getElementById('fecha')
 const lista=document.getElementById('lista')
 const input=document.querySelector('#input')
 const botonEnter= document.querySelector('#boton-enter')
-const check = 'fa-check circle'
+const check = 'fa-check-circle'
 const uncheck = 'fa-circle'
-const lineTrough = 'line-through'
+const lineThrough = 'line-through'
 let listaTareas
 let id
 
@@ -20,27 +20,27 @@ const agregarTarea = (tarea, id,realizado, eliminado)=>{
         return
     }
 
-    const done = realizado?check:uncheck
-    const line = realizado?lineTrough:''
+    const done = realizado? check : uncheck
+    const line = realizado? lineThrough:''
 
     const task=
     `
-    <li id="elemento">
-       <i class="far ${done}" data="realizado" id="${id}"></i>
-       <p class="text${line}">
-            ${tarea}
-        </p>
-        <i class="fas fa-trash" data="eliminado" id="${id}"></i>
-    </li>
+        <li id="elemento">
+        <i class="far ${done}" data="realizado" id="${id}"></i>
+        <p class="text ${line}">
+                ${tarea}
+            </p>
+            <i class="fas fa-trash" data="eliminado" id="${id}"></i>
+        </li>
     `
     lista.insertAdjacentHTML("beforeend",task)
 }
 
 const tareaRealizada = element => {
-    element.classList.tonggle(check)
-    element.classList.tonggle(uncheck)
-    element.parentNode.querySelector('.text').classList.toggle(lineTrough)
-    listaTareas[element.id].realizado=listaTareas[element.id].realizado ? false:true
+    element.classList.toggle(check)
+    element.classList.toggle(uncheck)
+    element.parentNode.querySelector('.text').classList.toggle(lineThrough)
+    listaTareas[element.id].realizado=listaTareas[element.id].realizado ? false : true
 }
 
 const tareaEliminada = element => {
@@ -82,7 +82,7 @@ document.addEventListener('keyup', (event) =>{
     }
 })
 
-const cargarLista =tareas =>{
+const cargarLista = tareas =>{
     tareas.forEach((tarea) =>{
         agregarTarea(tarea.nombre,tarea.id,tarea.realizado,tarea.eliminado)
     })
@@ -104,7 +104,7 @@ let data=localStorage.getItem('TODO')
 if (data){
     listaTareas=JSON.parse(data)
     id=listaTareas.length
-    cargarLista(Tareas)
+    cargarLista(listaTareas)
 }else{
     listaTareas=[]
     id=0
